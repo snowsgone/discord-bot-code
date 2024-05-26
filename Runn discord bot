@@ -1,14 +1,21 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const Discord = require("discord.js");
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "MESSAGE_CONTENT"],
+  partials: ["CHANNEL", "MESSAGE"],
 });
 
-client.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('Pong!');
+const token =
+  "your-bots-token";
+
+client.on("ready", async () => {
+  console.log(`Client has been initiated! ${client.user.username}`);
+});
+
+client.on("messageCreate", async (message) => {
+  if (message.content.toLowerCase() === "test") {
+    message.reply("Test sucessful");
   }
 });
 
-client.login('your-bot-token-goes-here');
+client.login(token);
